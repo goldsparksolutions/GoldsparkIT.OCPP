@@ -1,0 +1,26 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<TargetFramework>net6.0</TargetFramework>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<Nullable>enable</Nullable>
+		<LangVersion>latest</LangVersion>
+		<WarningsAsErrors>Nullable</WarningsAsErrors>
+		<Title>GoldsparkIT.OCPP.Models</Title>
+		<Authors>Goldspark IT</Authors>
+		<Product>GoldsparkIT.OCPP</Product>
+		<PackageProjectUrl>https://github.com/goldsparksolutions/GoldsparkIT.OCPP</PackageProjectUrl>
+		<RepositoryUrl>https://github.com/goldsparksolutions/GoldsparkIT.OCPP</RepositoryUrl>
+		<PackageLicenseExpression>MIT</PackageLicenseExpression>
+		<PackageRequireLicenseAcceptance>True</PackageRequireLicenseAcceptance>
+		<Description>Open Charge Point Protocol 1.6j models</Description>
+		<AssemblyVersion>1.0.4</AssemblyVersion>
+		<FileVersion>$(AssemblyVersion)</FileVersion>
+		<Version>$(AssemblyVersion)</Version>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+	</ItemGroup>
+
+</Project>

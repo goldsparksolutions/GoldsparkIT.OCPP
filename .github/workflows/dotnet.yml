@@ -1,0 +1,32 @@
+name: Build and publish NuGet packages
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main", "release/*" ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+    - name: Setup NuGet.exe for use with actions
+      uses: NuGet/setup-nuget@v1.2.0
+      with:
+        nuget-version: latest
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v3
+      with:
+        dotnet-version: 6.0.x
+    - name: Restore dependencies
+      run: dotnet restore
+    - name: Build
+      run: dotnet build --no-restore -c Release
+    - name: Pack GoldsparkIT.OCPP.Models
+      run: dotnet pack GoldsparkIT.OCPP.Models/GoldsparkIT.OCPP.Models.csproj --no-build -o nupkgs
+    - name: Pack GoldsparkIT.OCPP
+      run: dotnet pack GoldsparkIT.OCPP/GoldsparkIT.OCPP.csproj --no-build -o nupkgs
+    - name: Publish Packages
+      if: github.event_name != 'pull_request' && github.ref == 'refs/heads/main'
+      run: dotnet nuget push ./nupkgs/*.nupkg --api-key ${{ secrets.NUGET_API_KEY }} --source https://api.nuget.org/v3/index.json
